@@ -1,2 +1,2 @@
-# GRACE-CLOTHING-COLLECTION
+# grace-clothing-collection
 Creating an e-commerce web app
