@@ -1,33 +1,83 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Navigation from './components/Navigation';
-import HomePage from './pages/homepage';
-import ShopPage from './pages/shoppage';
-import ProductPage from './pages/productpage';
-import LoginPage from './pages/loginpage';
-import RegisterPage from './pages/register';
-import AboutPage from './pages/aboutpage';
-import CheckoutPage from './pages/checkoutpage';
-import DashboardPage from './pages/dashboard';
-import './App.css';
+import React, { useState } from 'react';
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
+import HomePage from './pages/HomePage';
+import ShopPage from './pages/ShopPage';
+import ProductPage from './pages/ProductPage';
+
+const CartPage = () => (
+  <div className="container py-5">
+    <div className="text-center">
+      <i className="bi bi-cart3 display-1 text-muted mb-3"></i>
+      <h1>Shopping Cart</h1>
+      <p className="text-muted">Your cart is currently empty</p>
+      <p>Cart functionality coming soon...</p>
+    </div>
+  </div>
+);
+
+const FavoritesPage = () => (
+  <div className="container py-5">
+    <div className="text-center">
+      <i className="bi bi-heart display-1 text-muted mb-3"></i>
+      <h1>Favorites</h1>
+      <p className="text-muted">You haven't added any favorites yet</p>
+      <p>Your favorite items will appear here...</p>
+    </div>
+  </div>
+);
+
+const ProfilePage = () => (
+  <div className="container py-5">
+    <div className="text-center">
+      <i className="bi bi-person-circle display-1 text-muted mb-3"></i>
+      <h1>Profile</h1>
+      <p className="text-muted">Manage your account settings</p>
+      <p>Profile management coming soon...</p>
+    </div>
+  </div>
+);
 
 function App() {
+  const [currentPage, setCurrentPage] = useState('home');
+  const [selectedProductId, setSelectedProductId] = useState(null);
+
+  const handleNavigate = (page, productId = null) => {
+    setCurrentPage(page);
+    if (productId) {
+      setSelectedProductId(productId);
+    }
+  };
+
+  const renderCurrentPage = () => {
+    switch (currentPage) {
+      case 'home':
+        return <HomePage onNavigate={handleNavigate} />;
+      case 'shop':
+        return <ShopPage onNavigate={handleNavigate} />;
+      case 'product':
+        return <ProductPage productId={selectedProductId} onNavigate={handleNavigate} />;
+      case 'cart':
+        return <CartPage />;
+      case 'favorites':
+        return <FavoritesPage />;
+      case 'profile':
+        return <ProfilePage />;
+      default:
+        return <HomePage onNavigate={handleNavigate} />;
+    }
+  };
+
   return (
-    <Router>
-      <div className="App">
-        <Navigation />
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/shop" element={<ShopPage />} />
-          <Route path="/product/:id" element={<ProductPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/register" element={<RegisterPage />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/checkout" element={<CheckoutPage />} />
-          <Route path="/dashboard" element={<DashboardPage />} />
-        </Routes>
-      </div>
-    </Router>
+    <div className="App">
+      <Navbar currentPage={currentPage} onNavigate={handleNavigate} />
+      <main className="flex-grow-1">
+        {renderCurrentPage()}
+      </main>
+      
+      {/* Footer */}
+      <Footer />
+    </div>
   );
 }
 

@@ -1,68 +1,367 @@
+/* Custom styles for Grace Clothing Collection */
+
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+  --grace-primary: #6f42c1;
+  --grace-secondary: #6c757d;
+  --grace-success: #20c997;
+  --grace-dark: #212529;
+  --grace-light: #f8f9fa;
 }
 
 body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f8f9fa;
   margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
+  padding: 0;
+}
+
+.App {
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+/* Product Cards */
+.product-card {
+  border: 2px solid #e9ecef !important;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
+.product-card:hover {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Scrollable Product Lists - inspired by home.css */
+.scrollable-product-list {
+  overflow-x: auto;
+  position: relative;
+}
+
+.product-row {
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding: 10px 0;
+  white-space: normal;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  padding-bottom: 5px; /* Space for the scrollbar to appear */
+}
+
+.product-row::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+/* Show scrollbar on hover */
+.scrollable-product-list:hover .product-row {
+  scrollbar-width: thin;
+  -ms-overflow-style: auto;
+}
+
+.scrollable-product-list:hover .product-row::-webkit-scrollbar {
+  display: block;
+  height: 8px;
+}
+
+.scrollable-product-list:hover .product-row::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+}
+
+.scrollable-product-list:hover .product-row::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+.scrollable-product-list:hover .product-row::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+/* Product card styling consistency - removed hover animations */
+.product-card-img-wrapper {
+  height: 200px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background-color: #f8f9fa;
+}
+
+.product-card-img-wrapper img {
+  object-fit: contain;
+  width: 100%;
+  height: 100%;
+}
+
+.product-card .card-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 1rem;
+}
+
+.product-card .card-title {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  height: auto;
+  line-height: 1.25;
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+}
+
+.product-card .text-muted.small {
+  margin-bottom: 0.5rem;
+  min-height: 1.25rem; /* Space for brand name */
+}
+
+.product-card .card-text {
+  margin-bottom: 0.5rem;
+}
+
+.product-card .text-success {
+  font-size: 1.25rem;
   font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  margin-top: auto; /* Pushes price to bottom */
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+.product-card .text-muted del {
+  font-size: 0.875rem;
+}
+
+.product-card .badge {
+  font-size: 0.875rem;
+  padding: 0.4em 0.6em;
+}
+
+/* Ensure consistent card sizing */
+.carousel-card {
+  width: 240px !important;
+  min-height: 320px;
+}
+
+.carousel-card .card {
+  height: 100%;
+}
+
+.carousel-card .card-img-top {
+  height: 200px;
+  object-fit: cover;
+}
+
+.carousel-card .card-body {
+  padding: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Carousel Styling */
+.carousel-item img {
+  border-radius: 8px;
+}
+
+/* Custom buttons */
+.btn-primary {
+  background-color: var(--grace-primary);
+  border-color: var(--grace-primary);
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: #5a2d8f;
+  border-color: #5a2d8f;
+}
+
+/* Primary Action Buttons - from home.css styling */
+.btn-techtrade-primary {
+  background-color: #ae1758 !important;
+  color: white !important;
+  border: none !important;
+  padding: 12px 24px !important;
+  transition: all 0.2s ease !important;
+  font-weight: 500 !important;
+}
+
+.btn-techtrade-primary:hover {
+  background-color: #8f1349 !important;
+  box-shadow: 0 4px 6px rgba(174, 23, 88, 0.2);
+}
+
+.btn-techtrade-primary:active {
+  box-shadow: none;
+}
+
+/* Outline button styling */
+.btn-techtrade-outline {
+  color: #ae1758 !important;
+  border-color: #ae1758 !important;
+  background-color: transparent !important;
+  padding: 12px 24px !important;
+  transition: all 0.2s ease !important;
+  font-weight: 500 !important;
+}
+
+.btn-techtrade-outline:hover {
+  color: white !important;
+  background-color: #ae1758 !important;
+  border-color: #ae1758 !important;
+}
+
+.btn-techtrade-outline:focus {
+  box-shadow: 0 0 0 0.25rem rgba(174, 23, 88, 0.25) !important;
+}
+
+.btn-techtrade-outline:active {
+  color: white !important;
+  background-color: #8f1349 !important; /* Darker shade for active state */
+  border-color: #8f1349 !important;
+}
+
+/* Navbar customizations */
+.navbar-brand {
+  font-size: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.navbar-brand:hover {
+  transform: scale(1.05);
+}
+
+/* Hero section */
+.bg-primary {
+  background-color: var(--grace-primary) !important;
+}
+
+/* Footer */
+footer {
+  margin-top: auto;
+  background-color: #212529 !important;
+}
+
+/* Card hover effects */
+.card {
+  transition: all 0.3s ease;
+  border: 1px solid #e9ecef;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  border-color: #dee2e6;
+}
+
+/* Filter cards */
+.card-header.bg-primary {
+  background-color: var(--grace-primary) !important;
+}
+
+/* Badge styling */
+.badge.bg-danger {
+  background-color: #dc3545 !important;
+}
+
+.badge.bg-success {
+  background-color: var(--grace-success) !important;
+}
+
+/* Wishlist button animation */
+.btn-danger {
+  animation: heartBeat 0.6s ease-in-out;
+}
+
+@keyframes heartBeat {
+  0% { transform: scale(1); }
+  14% { transform: scale(1.3); }
+  28% { transform: scale(1); }
+  42% { transform: scale(1.3); }
+  70% { transform: scale(1); }
+}
+
+/* Color swatch styling */
+.color-swatch {
+  transition: all 0.3s ease;
+}
+
+/* Removed hover scale effect to prevent display issues */
+
+/* Responsive design improvements */
+@media (max-width: 768px) {
+  .display-4 {
+    font-size: 2rem;
   }
-  a:hover {
-    color: #747bff;
+  
+  .lead {
+    font-size: 1rem;
   }
-  button {
-    background-color: #f9f9f9;
+  
+  .product-card:hover {
+    transform: translateY(-3px);
   }
+}
+
+/* Loading animations */
+.spinner-border {
+  color: var(--grace-primary);
+}
+
+/* Remove all shadows globally */
+.shadow, .shadow-sm, .shadow-lg {
+  box-shadow: none !important;
+}
+
+/* Custom scrollbar for webkit browsers */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--grace-primary);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #5a2d8f;
+}
+
+/* Footer hover effects */
+.hover-primary:hover {
+  color: var(--grace-primary) !important;
+  transition: color 0.3s ease;
+}
+
+/* Breadcrumb styling */
+.breadcrumb-item.active {
+  color: var(--grace-primary) !important;
+}
+
+/* Ensure consistent purple theme */
+.text-primary {
+  color: var(--grace-primary) !important;
+}
+
+.btn-primary {
+  background-color: var(--grace-primary);
+  border-color: var(--grace-primary);
+}
+
+.btn-outline-primary {
+  color: var(--grace-primary);
+  border-color: var(--grace-primary);
+}
+
+.btn-outline-primary:hover {
+  background-color: var(--grace-primary);
+  border-color: var(--grace-primary);
+}
+
+.border-primary {
+  border-color: var(--grace-primary) !important;
 }
